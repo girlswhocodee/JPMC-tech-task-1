@@ -57,5 +57,7 @@ index 40badcd..c715b94 100644
 -		print "Ratio %s" % getRatio(price, price)
 +		print ("Ratio %s" % (getRatio(prices['ABC'], price['DEF'])))
 -- 
+
+
 2.24.3 (Apple Git-128)
 
