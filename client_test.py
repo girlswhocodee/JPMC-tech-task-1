@@ -1,6 +1,6 @@
 import unittest
-from client3 import getDataPoint
-from client3 import getRatio
+from client import getDataPoint
+from client import getDataPoint, getRatio
 
 
 class ClientTest(unittest.TestCase):
@@ -24,13 +24,31 @@ class ClientTest(unittest.TestCase):
 
 
   """ ------------ Add more unit tests ------------ """
-  def test_getRatio(self):
-    price_a, price_b = [
-      {}
-    ]
+  def test_getRatio_priceBZero(self):
+    price_a = 119.2
+    price_b = 0
+    self.assertIsNone(getRatio(price_a, price_b))
+ 
+  def test_getRatio_priceAZero(self):
+    price_a = 0
+    price_b = 121.68
+    self.assertEqual(getRatio(price_a, price_b), 0)
+ 
+  def test_getRatio_greaterThan1(self):
+    price_a = 346.48
+    price_b = 166.39
+    self.assertGreater(getRatio(price_a, price_b), 1)
 
-    for price_a in prices:
-      self.assertEquals(getRatio(price_a, price_b))
+  def test_getRatio_LessThan1(self):
+    price_a = 166.39
+    price_b = 356.48
+    self.assertLess(getRatio(price_a, price_b), 1)
+
+  def test_getRatio_exactlyOne(self):
+    price_a = 356.48
+    price_b = 356.48
+    self.assertEqual(getRatio(price_a, price_b), 1)
+
 
 
 if __name__ == '__main__':
